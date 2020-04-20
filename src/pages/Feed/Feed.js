@@ -31,8 +31,8 @@ class Feed extends Component {
         }
       `,
     };
-    // fetch("http://localhost:5000/graphql", {
-    fetch("http://localhost:8080/graphql", {
+    fetch("http://localhost:5000/graphql", {
+    // fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -89,8 +89,8 @@ class Feed extends Component {
         page: page,
       },
     };
-    // fetch("http://localhost:5000/graphql", {
-    fetch("http://localhost:8080/graphql", {
+    fetch("http://localhost:5000/graphql", {
+    // fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -133,8 +133,8 @@ class Feed extends Component {
         userStatus: this.state.status,
       },
     };
-    // fetch("http://localhost:5000/graphql", {
-    fetch("http://localhost:8080/graphql", {
+    fetch("http://localhost:5000/graphql", {
+    // fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -182,8 +182,8 @@ class Feed extends Component {
     if (this.state.editPost) {
       formData.append("oldPath", this.state.editPost.imagePath);
     }
-    // fetch("http://localhost:5000/post-image", {
-    fetch("http://localhost:8080/graphql", {
+    fetch("http://localhost:5000/post-image", {
+    // fetch("http://localhost:8080/graphql", {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -322,9 +322,9 @@ class Feed extends Component {
         }
       `,
     };
-    // fetch("http://localhost:5000/graphql", {
+    fetch("http://localhost:5000/graphql", {
     fetch("http://localhost:8080/graphql", {
-      method: "POST",
+      // method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
         "Content-Type": "application/json",
@@ -374,7 +374,7 @@ class Feed extends Component {
           <form onSubmit={this.statusUpdateHandler}>
             <Input
               type="text"
-              placeholder="Your status"
+              placeholder="Slogan"
               control="input"
               onChange={this.statusInputChangeHandler}
               value={this.state.status}
@@ -386,7 +386,7 @@ class Feed extends Component {
         </section>
         <section className="feed__control">
           <Button mode="raised" design="accent" onClick={this.newPostHandler}>
-            New Post
+            New Client
           </Button>
         </section>
         <section className="feed">
@@ -396,7 +396,7 @@ class Feed extends Component {
             </div>
           )}
           {this.state.posts.length <= 0 && !this.state.postsLoading ? (
-            <p style={{ textAlign: "center" }}>No posts found.</p>
+            <p style={{ textAlign: "center" }}>No clients found.</p>
           ) : null}
           {!this.state.postsLoading && (
             <Paginator

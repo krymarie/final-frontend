@@ -7,7 +7,7 @@ const post = props => (
   <article className="post">
     <header className="post__header">
       <h3 className="post__meta">
-        Posted by {props.author} on {props.date}
+        Client added by {props.author} on {props.date}
       </h3>
       <h1 className="post__title">{props.title}</h1>
     </header>
