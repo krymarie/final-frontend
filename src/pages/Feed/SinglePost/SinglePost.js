@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Image from '../../../components/Image/Image';
-import './SinglePost.css';
+import Image from "../../../components/Image/Image";
+import "./SinglePost.css";
 
 class SinglePost extends Component {
   state = {
-    title: '',
-    author: '',
-    date: '',
-    image: '',
-    content: ''
+    title: "",
+    author: "",
+    date: "",
+    image: "",
+    content: "",
   };
 
   componentDidMount() {
@@ -28,33 +28,37 @@ class SinglePost extends Component {
         }
       `,
       variables: {
-        postId: postId
-      }
-    };
-    fetch('http://localhost:8080/graphql', {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + this.props.token,
-        'Content-Type': 'application/json'
+        postId: postId,
       },
-      body: JSON.stringify(graphqlQuery)
+    };
+    // fetch("http://localhost:5000/graphql", {
+    fetch("http://localhost:8080/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + this.props.token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(graphqlQuery),
     })
-      .then(res => {
+      .then((res) => {
         return res.json();
       })
-      .then(resData => {
+      .then((resData) => {
         if (resData.errors) {
-          throw new Error('Fetching post failed!');
+          throw new Error("Fetching post failed!");
         }
         this.setState({
           title: resData.data.post.title,
           author: resData.data.post.creator.name,
-          image: 'http://localhost:8080/' + resData.data.post.imageUrl,
-          date: new Date(resData.data.post.createdAt).toLocaleDateString('en-US'),
-          content: resData.data.post.content
+          // image: "http://localhost:5000/" + resData.data.post.imageUrl,
+          image: "http://localhost:8080/" + resData.data.post.imageUrl,
+          date: new Date(resData.data.post.createdAt).toLocaleDateString(
+            "en-US"
+          ),
+          content: resData.data.post.content,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
