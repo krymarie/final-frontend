@@ -194,7 +194,7 @@ class App extends Component {
             )}
           />
           <Route
-            path="/:postId"
+            path="/:clientID"
             render={(props) => (
               <SingleClientPage
                 {...props}
@@ -217,7 +217,7 @@ class App extends Component {
             )}
           />
           <Route
-            path="/:postId"
+            path="/:clientID"
             render={(props) => (
               <SingleClientPage
                 {...props}

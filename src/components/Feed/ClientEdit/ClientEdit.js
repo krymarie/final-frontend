@@ -8,7 +8,7 @@ import Input from '../../Form/Input/Input';
 import { required, length } from '../../../util/validators';
 import { generateBase64FromImage } from '../../../util/image';
 
-const POST_FORM = {
+const CLIENT_FORM = {
   clientName: {
     value: '',
     valid: false,
@@ -35,9 +35,9 @@ const POST_FORM = {
   }
 };
 
-class FeedEdit extends Component {
+class ClientEdit extends Component {
   state = {
-    postForm: POST_FORM,
+    clientForm: CLIENT_FORM,
     formIsValid: false,
     imagePreview: null
   };
@@ -46,40 +46,40 @@ class FeedEdit extends Component {
     if (
       this.props.editing &&
       prevProps.editing !== this.props.editing &&
-      prevProps.selectedPost !== this.props.selectedPost
+      prevProps.selectedClient !== this.props.selectedClient
     ) {
-      const postForm = {
+      const clientForm = {
         clientName: {
-          ...prevState.postForm.clientName,
-          value: this.props.selectedPost.clientName,
+          ...prevState.clientForm.clientName,
+          value: this.props.selectedClient.clientName,
           valid: true
         },
         image: {
-          ...prevState.postForm.image,
-          value: this.props.selectedPost.imagePath,
+          ...prevState.clientForm.image,
+          value: this.props.selectedClient.imagePath,
           valid: true
         },
         address: {
-          ...prevState.postForm.address,
-          value: this.props.selectedPost.address,
+          ...prevState.clientForm.address,
+          value: this.props.selectedClient.address,
           valid: true
         },
         phone: {
-          ...prevState.postForm.phone,
-          value: this.props.selectedPost.phone,
+          ...prevState.clientForm.phone,
+          value: this.props.selectedClient.phone,
           valid: true
         },
         interestLevel: {
-          ...prevState.postForm.interestLevel,
-          value: this.props.selectedPost.interestLevel,
+          ...prevState.clientForm.interestLevel,
+          value: this.props.selectedClient.interestLevel,
           valid: true
         },
       };
-      this.setState({ postForm: postForm, formIsValid: true });
+      this.setState({ clientForm: clientForm, formIsValid: true });
     }
   }
 
-  postInputChangeHandler = (input, value, files) => {
+  clientInputChangeHandler = (input, value, files) => {
     if (files) {
       generateBase64FromImage(files[0])
         .then(b64 => {
@@ -91,13 +91,13 @@ class FeedEdit extends Component {
     }
     this.setState(prevState => {
       let isValid = true;
-      for (const validator of prevState.postForm[input].validators) {
+      for (const validator of prevState.clientForm[input].validators) {
         isValid = isValid && validator(value);
       }
       const updatedForm = {
-        ...prevState.postForm,
+        ...prevState.clientForm,
         [input]: {
-          ...prevState.postForm[input],
+          ...prevState.clientForm[input],
           valid: isValid,
           value: files ? files[0] : value
         }
@@ -107,7 +107,7 @@ class FeedEdit extends Component {
         formIsValid = formIsValid && updatedForm[inputName].valid;
       }
       return {
-        postForm: updatedForm,
+        clientForm: updatedForm,
         formIsValid: formIsValid
       };
     });
@@ -116,10 +116,10 @@ class FeedEdit extends Component {
   inputBlurHandler = input => {
     this.setState(prevState => {
       return {
-        postForm: {
-          ...prevState.postForm,
+        clientForm: {
+          ...prevState.clientForm,
           [input]: {
-            ...prevState.postForm[input],
+            ...prevState.clientForm[input],
             touched: true
           }
         }
@@ -127,24 +127,24 @@ class FeedEdit extends Component {
     });
   };
 
-  cancelPostChangeHandler = () => {
+  cancelClientChangeHandler = () => {
     this.setState({
-      postForm: POST_FORM,
+      clientForm: CLIENT_FORM,
       formIsValid: false
     });
     this.props.onCancelEdit();
   };
 
-  acceptPostChangeHandler = () => {
+  acceptClientChangeHandler = () => {
     const post = {
-      clientName: this.state.postForm.clientName.value,
-      address: this.state.postForm.address.value,
-      phone: this.state.postForm.phone.value,
-      interestLevel: this.state.postForm.interestLevel.value,
+      clientName: this.state.clientForm.clientName.value,
+      address: this.state.clientForm.address.value,
+      phone: this.state.clientForm.phone.value,
+      interestLevel: this.state.clientForm.interestLevel.value,
     };
     this.props.onFinishEdit(post);
     this.setState({
-      postForm: POST_FORM,
+      clientForm: CLIENT_FORM,
       formIsValid: false,
       imagePreview: null
     });
@@ -153,12 +153,12 @@ class FeedEdit extends Component {
   render() {
     return this.props.editing ? (
       <Fragment>
-        <Backdrop onClick={this.cancelPostChangeHandler} />
+        <Backdrop onClick={this.cancelClientChangeHandler} />
         <Modal
           title="New Client"
           acceptEnabled={this.state.formIsValid}
-          onCancelModal={this.cancelPostChangeHandler}
-          onAcceptModal={this.acceptPostChangeHandler}
+          onCancelModal={this.cancelClientChangeHandler}
+          onAcceptModal={this.acceptClientChangeHandler}
           isLoading={this.props.loading}
         >
           <form>
@@ -166,22 +166,22 @@ class FeedEdit extends Component {
               id="clientName"
               label="Client Name"
               control="input"
-              onChange={this.postInputChangeHandler}
+              onChange={this.clientInputChangeHandler}
               onBlur={this.inputBlurHandler.bind(this, 'clientName')}
-              valid={this.state.postForm['clientName'].valid}
-              touched={this.state.postForm['clientName'].touched}
-              value={this.state.postForm['clientName'].value}
+              valid={this.state.clientForm['clientName'].valid}
+              touched={this.state.clientForm['clientName'].touched}
+              value={this.state.clientForm['clientName'].value}
             />
             {/* <FilePicker
               id="image"
               label="Image"
               control="input"
-              onChange={this.postInputChangeHandler}
+              onChange={this.clientInputChangeHandler}
               onBlur={this.inputBlurHandler.bind(this, 'image')}
-              valid={this.state.postForm['image'].valid}
-              touched={this.state.postForm['image'].touched}
+              valid={this.state.clientForm['image'].valid}
+              touched={this.state.clientForm['image'].touched}
             />
-            <div className="new-post__preview-image">
+            <div className="new-client__preview-image">
               {!this.state.imagePreview && <p>Please choose an image.</p>}
               {this.state.imagePreview && (
                 <Image imageUrl={this.state.imagePreview} contain left />
@@ -192,33 +192,33 @@ class FeedEdit extends Component {
               label="Address"
               control="textarea"
               rows="4"
-              onChange={this.postInputChangeHandler}
+              onChange={this.clientInputChangeHandler}
               onBlur={this.inputBlurHandler.bind(this, 'address')}
-              valid={this.state.postForm['address'].valid}
-              touched={this.state.postForm['address'].touched}
-              value={this.state.postForm['address'].value}
+              valid={this.state.clientForm['address'].valid}
+              touched={this.state.clientForm['address'].touched}
+              value={this.state.clientForm['address'].value}
             />
             <Input
               id="phone"
               label="Phone"
               control="textarea"
               rows="1"
-              onChange={this.postInputChangeHandler}
+              onChange={this.clientInputChangeHandler}
               onBlur={this.inputBlurHandler.bind(this, 'phone')}
-              valid={this.state.postForm['phone'].valid}
-              touched={this.state.postForm['phone'].touched}
-              value={this.state.postForm['phone'].value}
+              valid={this.state.clientForm['phone'].valid}
+              touched={this.state.clientForm['phone'].touched}
+              value={this.state.clientForm['phone'].value}
             />
             <Input
               id="interestLevel"
               label="Interest Level 1-5"
               control="textarea"
               rows="1"
-              onChange={this.postInputChangeHandler}
+              onChange={this.clientInputChangeHandler}
               onBlur={this.inputBlurHandler.bind(this, 'interestLevel')}
-              valid={this.state.postForm['interestLevel'].valid}
-              touched={this.state.postForm['interestLevel'].touched}
-              value={this.state.postForm['interestLevel'].value}
+              valid={this.state.clientForm['interestLevel'].valid}
+              touched={this.state.clientForm['interestLevel'].touched}
+              value={this.state.clientForm['interestLevel'].value}
             />
           </form>
         </Modal>
@@ -227,4 +227,4 @@ class FeedEdit extends Component {
   }
 }
 
-export default FeedEdit;
+export default ClientEdit;

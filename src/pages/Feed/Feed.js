@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 
 import Post from "../../components/Feed/Client/Client";
 import Button from "../../components/Button/Button";
-import FeedEdit from "../../components/Feed/FeedEdit/FeedEdit";
+import ClientEdit from "../../components/Feed/ClientEdit/ClientEdit";
 import Input from "../../components/Form/Input/Input";
 import Paginator from "../../components/Paginator/Paginator";
 import Loader from "../../components/Loader/Loader";
@@ -363,7 +363,7 @@ class Feed extends Component {
     return (
       <Fragment>
         <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-        <FeedEdit
+        <ClientEdit
           editing={this.state.isEditing}
           selectedPost={this.state.editPost}
           loading={this.state.editLoading}
