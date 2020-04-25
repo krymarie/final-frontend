@@ -1,7 +1,7 @@
 .button {
   font: inherit;
   border: none;
-  color: slategray;
+  color: #00929B;
   background: none;
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -14,8 +14,8 @@
 }
 
 .button:disabled {
-  background: #ccc;
-  color: #888888;
+  background: #fab83f;
+  color: white;
   cursor: not-allowed;
   border: #ccc;
   box-shadow: none;
@@ -23,14 +23,14 @@
 
 .button:disabled:hover,
 .button:disabled:active {
-  background: #ccc;
-  color: #888888;
+  background: #fbc766;
+  color: white;
   border: #ccc;
 }
 
 .button:hover,
 .button:active {
-  background: slategray;
+  background: rgb(99, 104, 109);
   color: white;
 }
 
@@ -40,8 +40,8 @@
 
 .button--flat:hover,
 .button--flat:active {
-  background: slategray;
-  color: slategray;
+  background: #fbc766;
+  color: white;
 }
 
 .button--raised {
@@ -74,7 +74,7 @@
 
 .button.button--accent.button--raised {
   background: #fab83f;
-  color: slategray;
+  color: white;
 }
 
 .button--raised.button--accent:hover,

@@ -374,7 +374,7 @@ class Feed extends Component {
           <form onSubmit={this.statusUpdateHandler}>
             <Input
               type="text"
-              placeholder="Slogan"
+              placeholder="'You miss 100% of the shots you don't take.' - Wayne Gretzky"
               control="input"
               onChange={this.statusInputChangeHandler}
               value={this.state.status}
