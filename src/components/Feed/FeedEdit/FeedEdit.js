@@ -3,29 +3,35 @@ import React, { Component, Fragment } from 'react';
 import Backdrop from '../../Backdrop/Backdrop';
 import Modal from '../../Modal/Modal';
 import Input from '../../Form/Input/Input';
-import FilePicker from '../../Form/Input/FilePicker';
-import Image from '../../Image/Image';
+// import FilePicker from '../../Form/Input/FilePicker';
+// import Image from '../../Image/Image';
 import { required, length } from '../../../util/validators';
 import { generateBase64FromImage } from '../../../util/image';
 
 const POST_FORM = {
-  title: {
+  clientName: {
     value: '',
     valid: false,
     touched: false,
     validators: [required, length({ min: 5 })]
   },
-  image: {
-    value: '',
-    valid: false,
-    touched: false,
-    validators: [required]
-  },
-  content: {
+  address: {
     value: '',
     valid: false,
     touched: false,
     validators: [required, length({ min: 5 })]
+  },
+  phone: {
+    value: '',
+    valid: false,
+    touched: false,
+    validators: [required, length({ min: 10 })]
+  },
+  interestLevel: {
+    value: '',
+    valid: false,
+    touched: false,
+    validators: [required, length({ min: 1 })]
   }
 };
 
@@ -43,9 +49,9 @@ class FeedEdit extends Component {
       prevProps.selectedPost !== this.props.selectedPost
     ) {
       const postForm = {
-        title: {
-          ...prevState.postForm.title,
-          value: this.props.selectedPost.title,
+        clientName: {
+          ...prevState.postForm.clientName,
+          value: this.props.selectedPost.clientName,
           valid: true
         },
         image: {
@@ -53,11 +59,21 @@ class FeedEdit extends Component {
           value: this.props.selectedPost.imagePath,
           valid: true
         },
-        content: {
-          ...prevState.postForm.content,
-          value: this.props.selectedPost.content,
+        address: {
+          ...prevState.postForm.address,
+          value: this.props.selectedPost.address,
           valid: true
-        }
+        },
+        phone: {
+          ...prevState.postForm.phone,
+          value: this.props.selectedPost.phone,
+          valid: true
+        },
+        interestLevel: {
+          ...prevState.postForm.interestLevel,
+          value: this.props.selectedPost.interestLevel,
+          valid: true
+        },
       };
       this.setState({ postForm: postForm, formIsValid: true });
     }
@@ -121,9 +137,10 @@ class FeedEdit extends Component {
 
   acceptPostChangeHandler = () => {
     const post = {
-      title: this.state.postForm.title.value,
-      image: this.state.postForm.image.value,
-      content: this.state.postForm.content.value
+      clientName: this.state.postForm.clientName.value,
+      address: this.state.postForm.address.value,
+      phone: this.state.postForm.phone.value,
+      interestLevel: this.state.postForm.interestLevel.value,
     };
     this.props.onFinishEdit(post);
     this.setState({
@@ -138,7 +155,7 @@ class FeedEdit extends Component {
       <Fragment>
         <Backdrop onClick={this.cancelPostChangeHandler} />
         <Modal
-          title="New Post"
+          title="New Client"
           acceptEnabled={this.state.formIsValid}
           onCancelModal={this.cancelPostChangeHandler}
           onAcceptModal={this.acceptPostChangeHandler}
@@ -146,16 +163,16 @@ class FeedEdit extends Component {
         >
           <form>
             <Input
-              id="title"
-              label="Title"
+              id="clientName"
+              label="Client Name"
               control="input"
               onChange={this.postInputChangeHandler}
-              onBlur={this.inputBlurHandler.bind(this, 'title')}
-              valid={this.state.postForm['title'].valid}
-              touched={this.state.postForm['title'].touched}
-              value={this.state.postForm['title'].value}
+              onBlur={this.inputBlurHandler.bind(this, 'clientName')}
+              valid={this.state.postForm['clientName'].valid}
+              touched={this.state.postForm['clientName'].touched}
+              value={this.state.postForm['clientName'].value}
             />
-            <FilePicker
+            {/* <FilePicker
               id="image"
               label="Image"
               control="input"
@@ -169,17 +186,39 @@ class FeedEdit extends Component {
               {this.state.imagePreview && (
                 <Image imageUrl={this.state.imagePreview} contain left />
               )}
-            </div>
+            </div> */}
             <Input
-              id="content"
-              label="Content"
+              id="address"
+              label="Address"
               control="textarea"
-              rows="5"
+              rows="4"
               onChange={this.postInputChangeHandler}
-              onBlur={this.inputBlurHandler.bind(this, 'content')}
-              valid={this.state.postForm['content'].valid}
-              touched={this.state.postForm['content'].touched}
-              value={this.state.postForm['content'].value}
+              onBlur={this.inputBlurHandler.bind(this, 'address')}
+              valid={this.state.postForm['address'].valid}
+              touched={this.state.postForm['address'].touched}
+              value={this.state.postForm['address'].value}
+            />
+            <Input
+              id="phone"
+              label="Phone"
+              control="textarea"
+              rows="1"
+              onChange={this.postInputChangeHandler}
+              onBlur={this.inputBlurHandler.bind(this, 'phone')}
+              valid={this.state.postForm['phone'].valid}
+              touched={this.state.postForm['phone'].touched}
+              value={this.state.postForm['phone'].value}
+            />
+            <Input
+              id="interestLevel"
+              label="Interest Level 1-5"
+              control="textarea"
+              rows="1"
+              onChange={this.postInputChangeHandler}
+              onBlur={this.inputBlurHandler.bind(this, 'interestLevel')}
+              valid={this.state.postForm['interestLevel'].valid}
+              touched={this.state.postForm['interestLevel'].touched}
+              value={this.state.postForm['interestLevel'].value}
             />
           </form>
         </Modal>

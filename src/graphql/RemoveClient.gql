@@ -1,0 +1,6 @@
+mutation removeClient($id: String!) {
+  deleteClient(where: { id: $id }) {
+    id
+    name
+  }
+}

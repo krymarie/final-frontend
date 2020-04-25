@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-import Post from "../../components/Feed/Post/Post";
+import Post from "../../components/Feed/Client/Client";
 import Button from "../../components/Button/Button";
 import FeedEdit from "../../components/Feed/FeedEdit/FeedEdit";
 import Input from "../../components/Form/Input/Input";
@@ -31,8 +31,8 @@ class Feed extends Component {
         }
       `,
     };
-    fetch("http://localhost:5000/graphql", {
-    // fetch("http://localhost:8080/graphql", {
+    // fetch("http://localhost:5000/graphql", {
+    fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -89,8 +89,8 @@ class Feed extends Component {
         page: page,
       },
     };
-    fetch("http://localhost:5000/graphql", {
-    // fetch("http://localhost:8080/graphql", {
+    // fetch("http://localhost:5000", {
+    fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -103,7 +103,7 @@ class Feed extends Component {
       })
       .then((resData) => {
         if (resData.errors) {
-          throw new Error("Fetching posts failed!");
+          throw new Error("Fetching clients failed!");
         }
         this.setState({
           posts: resData.data.posts.posts.map((post) => {
@@ -133,8 +133,8 @@ class Feed extends Component {
         userStatus: this.state.status,
       },
     };
-    fetch("http://localhost:5000/graphql", {
-    // fetch("http://localhost:8080/graphql", {
+    // fetch("http://localhost:5000/graphql", {
+    fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -147,7 +147,7 @@ class Feed extends Component {
       })
       .then((resData) => {
         if (resData.errors) {
-          throw new Error("Fetching posts failed!");
+          throw new Error("Fetching clients failed!");
         }
         console.log(resData);
       })
@@ -182,8 +182,8 @@ class Feed extends Component {
     if (this.state.editPost) {
       formData.append("oldPath", this.state.editPost.imagePath);
     }
-    fetch("http://localhost:5000/post-image", {
-    // fetch("http://localhost:8080/graphql", {
+    // fetch("http://localhost:5000/post-image", {
+    fetch("http://localhost:8080/graphql", {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -240,7 +240,7 @@ class Feed extends Component {
           };
         }
 
-        // return fetch("http://localhost:5000/graphql", {
+        
         fetch("http://localhost:8080/graphql", {
           method: "POST",
           body: JSON.stringify(graphqlQuery),
@@ -322,7 +322,7 @@ class Feed extends Component {
         }
       `,
     };
-    fetch("http://localhost:5000/graphql", {
+    // fetch("http://localhost:5000/graphql", {
     fetch("http://localhost:8080/graphql", {
       // method: "POST",
       headers: {

@@ -1,0 +1,20 @@
+mutation addClient(
+  $name: String!
+  $address: String!
+  $phone: String!
+  $interestLevel: Int!
+  $imageUrl: String!
+) {
+  createClient(
+    data: {
+      name: $name
+      address: $address
+      phone: $phone
+      interestLevel: $interestLevel
+      imageUrl: $imageUrl
+    }
+  ) {
+    id
+    name
+  }
+}

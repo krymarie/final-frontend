@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 import Image from "../../../components/Image/Image";
-import "./SinglePost.css";
+import "./SingleClient.css";
 
-class SinglePost extends Component {
+class SingleClient extends Component {
   state = {
     title: "",
     author: "",
@@ -15,7 +15,7 @@ class SinglePost extends Component {
   componentDidMount() {
     const postId = this.props.match.params.postId;
     const graphqlQuery = {
-      query: `query FetchSinglePost($postId: ID!) {
+      query: `query FetchSingleClient($postId: ID!) {
           post(id: $postId) {
             title
             content
@@ -31,8 +31,8 @@ class SinglePost extends Component {
         postId: postId,
       },
     };
-    fetch("http://localhost:5000/graphql", {
-    // fetch("http://localhost:8080/graphql", {
+    // fetch("http://localhost:5000/graphql", {
+    fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -45,13 +45,13 @@ class SinglePost extends Component {
       })
       .then((resData) => {
         if (resData.errors) {
-          throw new Error("Fetching post failed!");
+          throw new Error("Fetching client failed!");
         }
         this.setState({
           title: resData.data.post.title,
           author: resData.data.post.creator.name,
-          image: "http://localhost:5000/" + resData.data.post.imageUrl,
-          // image: "http://localhost:8080/" + resData.data.post.imageUrl,
+          // image: "http://localhost:5000/" + resData.data.post.imageUrl,
+          image: "http://localhost:8080/" + resData.data.post.imageUrl,
           date: new Date(resData.data.post.createdAt).toLocaleDateString(
             "en-US"
           ),
@@ -65,12 +65,12 @@ class SinglePost extends Component {
 
   render() {
     return (
-      <section className="single-post">
+      <section className="single-client">
         <h1>{this.state.title}</h1>
         <h2>
           Created by {this.state.author} on {this.state.date}
         </h2>
-        <div className="single-post__image">
+        <div className="single-client__image">
           <Image contain imageUrl={this.state.image} />
         </div>
         <p>{this.state.content}</p>
@@ -79,4 +79,4 @@ class SinglePost extends Component {
   }
 }
 
-export default SinglePost;
+export default SingleClient;

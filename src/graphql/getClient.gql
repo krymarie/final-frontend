@@ -1,0 +1,10 @@
+query getClient($id: String) {
+  Product(id: "123454") {
+    id
+    name
+    address
+    phone
+    interestLevel
+    imageUrl
+  }
+}

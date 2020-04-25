@@ -1,0 +1,10 @@
+query allClients($searchString: String) {
+  Clients(searchString: $searchString) {
+    id
+    name
+    address
+    phone
+    interestLevel
+    imageUrl
+  }
+}

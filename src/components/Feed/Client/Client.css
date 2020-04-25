@@ -1,33 +1,33 @@
-.post {
+.client {
   margin: 1rem 0;
   border: 1px solid slategray;
   border-radius: 5px;
   padding: 0.5rem;
 }
 
-.post__meta {
+.client__meta {
   font-size: 1rem;
   color: #707070;
   margin: 0;
 }
 
-.post__title {
+.client__title {
   font-size: 1.5rem;
   margin: 1rem 0;
   color: slategray;
 }
 
-.post__image {
+.client__image {
   height: 15rem;
   width: 100%;
 }
 
-.post__actions {
+.client__actions {
   text-align: right;
 }
 
 @media (min-width: 768px) {
-  .post {
+  .client {
     padding: 1rem;
     width: 40rem;
     margin-left: auto;

@@ -1,21 +1,21 @@
 import React from 'react';
 
 import Button from '../../Button/Button';
-import './Post.css';
+import './Client.css';
 
-const post = props => (
-  <article className="post">
-    <header className="post__header">
-      <h3 className="post__meta">
+const client = props => (
+  <article className="client">
+    <header className="client__header">
+      <h3 className="client__meta">
         Client added by {props.author} on {props.date}
       </h3>
-      <h1 className="post__title">{props.title}</h1>
+      <h1 className="client__title">{props.title}</h1>
     </header>
-    {/* <div className="post__image">
+    {/* <div className="client__image">
       <Image imageUrl={props.image} contain />
     </div>
-    <div className="post__content">{props.content}</div> */}
-    <div className="post__actions">
+    <div className="client__content">{props.content}</div> */}
+    <div className="client_actions">
       <Button mode="flat" link={props.id}>
         View
       </Button>
@@ -29,4 +29,4 @@ const post = props => (
   </article>
 );
 
-export default post;
+export default client;
