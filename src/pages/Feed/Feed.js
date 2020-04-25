@@ -75,7 +75,8 @@ class Feed extends Component {
               _id
               title
               content
-              imageUrl
+              phone
+              insterestLevel
               creator {
                 name
               }
@@ -195,8 +196,8 @@ class Feed extends Component {
         const imageUrl = fileResData.filePath || "undefined";
         let graphqlQuery = {
           query: `
-          mutation CreateNewPost($title: String!, $content: String!, $imageUrl: String!) {
-            createPost(postInput: {title: $title, content: $content, imageUrl: $imageUrl}) {
+          mutation CreateNewPost($title: String!, $content: String!, $phone: String!, $insterestLevel: String!,: String!,) {
+            createPost(postInput: {title: $title, content: $content, phone: $phone, insterestLevel: $insterestLevel}) {
               _id
               title
               content
@@ -211,19 +212,21 @@ class Feed extends Component {
           variables: {
             title: postData.title,
             content: postData.content,
-            imageUrl: imageUrl,
+            phone: postData.phone,
+            insterestLevel: postData.insterestLevel,
           },
         };
 
         if (this.state.editPost) {
           graphqlQuery = {
             query: `
-              mutation UpdateExistingPost($postId: ID!, $title: String!, $content: String!, $imageUrl: String!) {
-                updatePost(id: $postId, postInput: {title: $title, content: $content, imageUrl: $imageUrl}) {
+              mutation UpdateExistingPost($postId: ID!, $title: String!, $content: String!, $phone: String!, $insterestLevel: String!) {
+                updatePost(id: $postId, postInput: {title: $title, content: $content, phone: $phone,, insterestLevel: $insterestLevel}) {
                   _id
                   title
                   content
-                  imageUrl
+                  phone
+                  insterestLevel
                   creator {
                     name
                   }
@@ -235,7 +238,8 @@ class Feed extends Component {
               postId: this.state.editPost._id,
               title: postData.title,
               content: postData.content,
-              imageUrl: imageUrl,
+              phone: postData.phone,
+              insterestLevel: postData.insterestLevel,
             },
           };
         }
@@ -270,9 +274,10 @@ class Feed extends Component {
           _id: resData.data[resDataField]._id,
           title: resData.data[resDataField].title,
           content: resData.data[resDataField].content,
+          phnoe: resData.data[resDataField].phone,
+          insterestLevel: resData.data[resDataField].insterestLevel,
           creator: resData.data[resDataField].creator,
           createdAt: resData.data[resDataField].createdAt,
-          imagePath: resData.data[resDataField].imageUrl,
         };
         this.setState((prevState) => {
           let updatedPosts = [...prevState.posts];
@@ -412,8 +417,9 @@ class Feed extends Component {
                   author={post.creator.name}
                   date={new Date(post.createdAt).toLocaleDateString("en-US")}
                   title={post.title}
-                  image={post.imageUrl}
                   content={post.content}
+                  phone={post.phone}
+                  insterestLevel={post.insterestLevel}
                   onStartEdit={this.startEditPostHandler.bind(this, post._id)}
                   onDelete={this.deletePostHandler.bind(this, post._id)}
                 />

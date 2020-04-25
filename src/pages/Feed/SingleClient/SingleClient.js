@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 
-import Image from "../../../components/Image/Image";
 import "./SingleClient.css";
 
 class SingleClient extends Component {
   state = {
     title: "",
     author: "",
-    date: "",
-    image: "",
+    date: '',
     content: "",
+    phone: "",
+    interestLevel: "",
   };
 
   componentDidMount() {
@@ -19,7 +19,8 @@ class SingleClient extends Component {
           post(id: $postId) {
             title
             content
-            imageUrl
+            phone
+            interestLevel
             creator {
               name
             }
@@ -50,12 +51,12 @@ class SingleClient extends Component {
         this.setState({
           title: resData.data.post.title,
           author: resData.data.post.creator.name,
-          // image: "http://localhost:5000/" + resData.data.post.imageUrl,
-          image: "http://localhost:8080/" + resData.data.post.imageUrl,
           date: new Date(resData.data.post.createdAt).toLocaleDateString(
             "en-US"
           ),
           content: resData.data.post.content,
+          phone: resData.data.post.phone,
+          interestLevel: resData.data.post.interestLevel,
         });
       })
       .catch((err) => {
@@ -70,10 +71,9 @@ class SingleClient extends Component {
         <h2>
           Created by {this.state.author} on {this.state.date}
         </h2>
-        <div className="single-client__image">
-          <Image contain imageUrl={this.state.image} />
-        </div>
         <p>{this.state.content}</p>
+        <p>{this.state.phone}</p>
+        <p>{this.state.interestLevel}</p>
       </section>
     );
   }

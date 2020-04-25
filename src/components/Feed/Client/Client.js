@@ -7,14 +7,12 @@ const client = props => (
   <article className="client">
     <header className="client__header">
       <h3 className="client__meta">
-        Client added by {props.author} on {props.date}
+        {/* Client added by {props.author} on {props.date} */}
+        Client added on {props.date}
       </h3>
       <h1 className="client__title">{props.title}</h1>
     </header>
-    {/* <div className="client__image">
-      <Image imageUrl={props.image} contain />
-    </div>
-    <div className="client__content">{props.content}</div> */}
+    <div className="client__content">{props.content}</div>
     <div className="client_actions">
       <Button mode="flat" link={props.id}>
         View
