@@ -110,7 +110,7 @@ class Feed extends Component {
           posts: resData.data.posts.posts.map((post) => {
             return {
               ...post,
-              imagePath: post.imageUrl,
+              // imagePath: post.imageUrl,
             };
           }),
           totalPosts: resData.data.posts.totalPosts,
@@ -193,7 +193,7 @@ class Feed extends Component {
     })
       .then((res) => res.json())
       .then((fileResData) => {
-        const imageUrl = fileResData.filePath || "undefined";
+        // const imageUrl = fileResData.filePath || "undefined";
         let graphqlQuery = {
           query: `
           mutation CreateNewPost($title: String!, $content: String!, $phone: String!, $insterestLevel: String!,: String!,) {
@@ -201,7 +201,8 @@ class Feed extends Component {
               _id
               title
               content
-              imageUrl
+              phone
+              interestLevel
               creator {
                 name
               }
