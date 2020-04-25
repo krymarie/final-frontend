@@ -12,7 +12,9 @@ const client = props => (
       </h3>
       <h1 className="client__title">{props.title}</h1>
     </header>
-    <div className="client__content">{props.content}</div>
+    <div className="client__content">Details: {props.content}</div>
+    <div className="client__content">Phone: {props.phone}</div>
+    <div className="client__content">Interest Level: {props.interestLevel}</div>
     <div className="client_actions">
       <Button mode="flat" link={props.id}>
         View

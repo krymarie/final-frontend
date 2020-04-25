@@ -1,10 +1,9 @@
 query clientAddress($searchString: String) {
-  Address(address: $address) {
+  Address(content: $content) {
     id
     name
-    address
+    content
     phone
     interestLevel
-    imageUrl
   }
 }

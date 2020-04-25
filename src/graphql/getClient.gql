@@ -2,9 +2,8 @@ query getClient($id: String) {
   Product(id: "123454") {
     id
     name
-    address
+    content
     phone
     interestLevel
-    imageUrl
   }
 }

@@ -3,19 +3,17 @@ import React, { Component, Fragment } from 'react';
 import Backdrop from '../../Backdrop/Backdrop';
 import Modal from '../../Modal/Modal';
 import Input from '../../Form/Input/Input';
-// import FilePicker from '../../Form/Input/FilePicker';
-// import Image from '../../Image/Image';
 import { required, length } from '../../../util/validators';
 import { generateBase64FromImage } from '../../../util/image';
 
 const CLIENT_FORM = {
-  clientName: {
+  title: {
     value: '',
     valid: false,
     touched: false,
     validators: [required, length({ min: 5 })]
   },
-  address: {
+  content: {
     value: '',
     valid: false,
     touched: false,
@@ -49,19 +47,14 @@ class ClientEdit extends Component {
       prevProps.selectedClient !== this.props.selectedClient
     ) {
       const clientForm = {
-        clientName: {
-          ...prevState.clientForm.clientName,
-          value: this.props.selectedClient.clientName,
+        title: {
+          ...prevState.clientForm.title,
+          value: this.props.selectedClient.title,
           valid: true
         },
-        image: {
-          ...prevState.clientForm.image,
-          value: this.props.selectedClient.imagePath,
-          valid: true
-        },
-        address: {
-          ...prevState.clientForm.address,
-          value: this.props.selectedClient.address,
+        content: {
+          ...prevState.clientForm.content,
+          value: this.props.selectedClient.content,
           valid: true
         },
         phone: {
@@ -137,8 +130,8 @@ class ClientEdit extends Component {
 
   acceptClientChangeHandler = () => {
     const post = {
-      clientName: this.state.clientForm.clientName.value,
-      address: this.state.clientForm.address.value,
+      title: this.state.clientForm.title.value,
+      content: this.state.clientForm.content.value,
       phone: this.state.clientForm.phone.value,
       interestLevel: this.state.clientForm.interestLevel.value,
     };
@@ -163,40 +156,25 @@ class ClientEdit extends Component {
         >
           <form>
             <Input
-              id="clientName"
+              id="title"
               label="Client Name"
               control="input"
               onChange={this.clientInputChangeHandler}
-              onBlur={this.inputBlurHandler.bind(this, 'clientName')}
-              valid={this.state.clientForm['clientName'].valid}
-              touched={this.state.clientForm['clientName'].touched}
-              value={this.state.clientForm['clientName'].value}
+              onBlur={this.inputBlurHandler.bind(this, 'title')}
+              valid={this.state.clientForm['title'].valid}
+              touched={this.state.clientForm['title'].touched}
+              value={this.state.clientForm['title'].value}
             />
-            {/* <FilePicker
-              id="image"
-              label="Image"
-              control="input"
-              onChange={this.clientInputChangeHandler}
-              onBlur={this.inputBlurHandler.bind(this, 'image')}
-              valid={this.state.clientForm['image'].valid}
-              touched={this.state.clientForm['image'].touched}
-            />
-            <div className="new-client__preview-image">
-              {!this.state.imagePreview && <p>Please choose an image.</p>}
-              {this.state.imagePreview && (
-                <Image imageUrl={this.state.imagePreview} contain left />
-              )}
-            </div> */}
             <Input
-              id="address"
-              label="Address"
+              id="content"
+              label="Details"
               control="textarea"
               rows="4"
               onChange={this.clientInputChangeHandler}
-              onBlur={this.inputBlurHandler.bind(this, 'address')}
-              valid={this.state.clientForm['address'].valid}
-              touched={this.state.clientForm['address'].touched}
-              value={this.state.clientForm['address'].value}
+              onBlur={this.inputBlurHandler.bind(this, 'content')}
+              valid={this.state.clientForm['content'].valid}
+              touched={this.state.clientForm['content'].touched}
+              value={this.state.clientForm['content'].value}
             />
             <Input
               id="phone"
@@ -211,7 +189,7 @@ class ClientEdit extends Component {
             />
             <Input
               id="interestLevel"
-              label="Interest Level 1-5"
+              label="Interest Level"
               control="textarea"
               rows="1"
               onChange={this.clientInputChangeHandler}

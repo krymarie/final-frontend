@@ -2,9 +2,8 @@ query allClients($searchString: String) {
   Clients(searchString: $searchString) {
     id
     name
-    address
+    content
     phone
     interestLevel
-    imageUrl
   }
 }
