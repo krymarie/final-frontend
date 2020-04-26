@@ -19,7 +19,7 @@ class App extends Component {
   state = {
     showBackdrop: false,
     showMobileNav: false,
-    isAuth: true, //hard coded for school only
+    isAuth: true, // TODO: revert back to false after dev
     token: null,
     userId: null,
     authLoading: false,
@@ -75,7 +75,7 @@ class App extends Component {
       },
     };
     this.setState({ authLoading: true });
-    // fetch("http://localhost:5000/graphql", {
+
     fetch("http://localhost:8080/graphql", {
       mode: "no-cors",
       method: "POST",
@@ -140,8 +140,8 @@ class App extends Component {
         password: authData.signupForm.password.value,
       },
     };
-    // fetch("http://localhost:5000/graphql", {
-    fetch("http://localhost:4000/graphql'", {
+    fetch("http://localhost:8080/graphql", {
+      mode: "no-cors",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -149,13 +149,13 @@ class App extends Component {
       body: JSON.stringify(graphqlQuery),
     })
       .then((res) => {
-        console.log("res", res); // is there any res?
+        console.log("res", res);
         return res.json();
       })
       .then((resData) => {
         if (resData.errors && resData.errors[0].status === 422) {
           throw new Error(
-            "Validation failed. Make sure the email address isn't used yet!"
+            "Validation failed. Make sure the email isn't already signedUp!"
           );
         }
         if (resData.errors) {
@@ -188,30 +188,64 @@ class App extends Component {
   render() {
     let routes = (
       <Switch>
-        {/* <Route
+        <Route
           path="/"
           exact
-          render={props => (
-            <LoginPage
+          render={(props) => (
+            <FeedPage userId={this.state.userId} token={this.state.token} />
+          )}
+        />
+        <Route
+          path="/pipeline"
+          render={(props) => (
+            <Pipeline
               {...props}
-              onLogin={this.loginHandler}
-              loading={this.state.authLoading}
+              userId={this.state.userId}
+              token={this.state.token}
             />
           )}
         />
         <Route
-          path="/signup"
-          exact
-          render={props => (
-            <SignupPage
+          path="/phone-book"
+          render={(props) => <PhoneBook {...props} />}
+        />
+        <Route
+          path="/:clientID"
+          render={(props) => (
+            <SingleClientPage
               {...props}
-              onSignup={this.signupHandler}
-              loading={this.state.authLoading}
+              userId={this.state.userId}
+              token={this.state.token}
             />
           )}
-        /> */}
+        />
         <Redirect to="/" />
       </Switch>
+      // <Switch>
+      //   <Route
+      //     path="/"
+      //     exact
+      //     render={(props) => (
+      //       <LoginPage
+      //         {...props}
+      //         onLogin={this.loginHandler}
+      //         loading={this.state.authLoading}
+      //       />
+      //     )}
+      //   />
+      //   <Route
+      //     path="/signup"
+      //     exact
+      //     render={(props) => (
+      //       <SignupPage
+      //         {...props}
+      //         onSignup={this.signupHandler}
+      //         loading={this.state.authLoading}
+      //       />
+      //     )}
+      //   />
+      //   <Redirect to="/" />
+      // </Switch>
     );
     if (this.state.isAuth) {
       routes = (

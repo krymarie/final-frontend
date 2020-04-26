@@ -30,7 +30,7 @@ class Feed extends Component {
       `,
     };
     // fetch("http://localhost:5000/graphql", {
-    fetch("http://localhost:4000/graphql'", {
+    fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -89,7 +89,7 @@ class Feed extends Component {
       },
     };
     fetch("http://localhost:5555/graphql", {
-      // fetch("http://localhost:4000/graphql'", {
+      // fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -147,7 +147,7 @@ class Feed extends Component {
       formData.append("oldPath", this.state.editPost.imagePath);
     }
     // fetch("http://localhost:5000/post-image", {
-    fetch("http://localhost:4000/graphql'", {
+    fetch("http://localhost:8080/graphql", {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -208,7 +208,7 @@ class Feed extends Component {
           };
         }
         // fetch("http://localhost:5000/graphql", {
-        fetch("http://localhost:4000/graphql'", {
+        fetch("http://localhost:8080/graphql", {
           method: "POST",
           body: JSON.stringify(graphqlQuery),
           headers: {
@@ -291,7 +291,7 @@ class Feed extends Component {
       `,
     };
     // fetch("http://localhost:5000/graphql", {
-    fetch("http://localhost:4000/graphql'", {
+    fetch("http://localhost:8080/graphql", {
       // method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,

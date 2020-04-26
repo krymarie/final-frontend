@@ -16,7 +16,7 @@ class Pipeline extends Component {
       query: `query FetchingAllClients() {}`,
     };
     // fetch("http://localhost:5000/graphql", {
-    fetch("http://localhost:4000/graphql'", {
+    fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,

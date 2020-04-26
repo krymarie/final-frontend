@@ -8,7 +8,7 @@ const navItems = [
   { id: "pipeline", text: "Pipeline", link: "/pipeline", auth: true },
   { id: "phoneBook", text: "Phone Book", link: "/phone-book", auth: true },
   { id: "login", text: "Login", link: "/", auth: false },
-  { id: "signup", text: "Signup", link: "/", auth: false },
+  { id: "signup", text: "Signup", link: "/signup", auth: false },
 ];
 
 const navigationItems = (props) => [
