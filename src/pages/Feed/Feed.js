@@ -3,7 +3,6 @@ import React, { Component, Fragment } from "react";
 import Post from "../../components/Feed/Client/Client";
 import Button from "../../components/Button/Button";
 import ClientEdit from "../../components/Feed/ClientEdit/ClientEdit";
-import Input from "../../components/Form/Input/Input";
 import Paginator from "../../components/Paginator/Paginator";
 import Loader from "../../components/Loader/Loader";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
@@ -15,7 +14,6 @@ class Feed extends Component {
     posts: [],
     totalPosts: 0,
     editPost: null,
-    status: "",
     postPage: 1,
     postsLoading: true,
     editLoading: false,
@@ -91,7 +89,7 @@ class Feed extends Component {
       },
     };
     fetch("http://localhost:5555/graphql", {
-    // fetch("http://localhost:4000/graphql'", {
+      // fetch("http://localhost:4000/graphql'", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -116,41 +114,6 @@ class Feed extends Component {
           totalPosts: resData.data.posts.totalPosts,
           postsLoading: false,
         });
-      })
-      .catch(this.catchError);
-  };
-
-  statusUpdateHandler = (event) => {
-    event.preventDefault();
-    const graphqlQuery = {
-      query: `
-        mutation UpdateUserStatus($userStatus: String!) {
-          updateStatus(status: $userStatus) {
-            status
-          }
-        }
-      `,
-      variables: {
-        userStatus: this.state.status,
-      },
-    };
-    // fetch("http://localhost:5000/graphql", {
-    fetch("http://localhost:4000/graphql'", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(graphqlQuery),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((resData) => {
-        if (resData.errors) {
-          throw new Error("Fetching clients failed!");
-        }
-        console.log(resData);
       })
       .catch(this.catchError);
   };
@@ -375,20 +338,7 @@ class Feed extends Component {
           onCancelEdit={this.cancelEditHandler}
           onFinishEdit={this.finishEditHandler}
         />
-        <section className="feed__status">
-          <form onSubmit={this.statusUpdateHandler}>
-            <Input
-              type="text"
-              placeholder="'You miss 100% of the shots you don't take.' - Wayne Gretzky"
-              control="input"
-              onChange={this.statusInputChangeHandler}
-              value={this.state.status}
-            />
-            <Button mode="flat" type="submit">
-              Update
-            </Button>
-          </form>
-        </section>
+        <section className="feed__status"></section>
         <section className="feed__control">
           <Button mode="raised" design="accent" onClick={this.newPostHandler}>
             New Client

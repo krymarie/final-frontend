@@ -4,10 +4,9 @@ import "./SingleClient.css";
 
 class SingleClient extends Component {
   state = {
-    title: "",
-    content: "",
-    phone: "",
-    interestLevel: "",
+    newThisWeek: 2,
+    newThisMonth: 28,
+    newWeekAverage: 4,
   };
 
   componentDidMount() {
@@ -67,16 +66,13 @@ class SingleClient extends Component {
       <section className="single-client">
         <h2>Client Pipeline</h2>
         <h3>This Week:</h3>
-        <p>New Clients: 2</p>
-        <p>Average New Clients/week: 8</p>
-        {/* <p>{this.state.content}</p>
-        <p>{this.state.phone}</p>
-        <p>{this.state.interestLevel}</p> */}
+        <p>New Clients: {this.state.newThisWeek}</p>
+        <p>Weekly Average: {this.state.newWeekAverage}</p>
         <br />
         <h3>Last 30 Days:</h3>
-        <p>New Clients: 83</p>
+        <p>New Clients: {this.state.newThisMonth}</p>
         <p>Average New Clients/week: 237</p>
-        <br />
+        <br />git
         <h3>Totals:</h3>
         <p>Active Clients: 973</p>
         <p>Total Client: 4</p>
