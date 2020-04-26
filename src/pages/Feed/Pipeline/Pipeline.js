@@ -31,9 +31,9 @@ class Pipeline extends Component {
         if (resData.errors) {
           throw new Error("Fetching clients failed!");
         }
-        // TODO: clean up logic to
+        // TODO: clean up analytics to something more like
         // SELECT * FROM 'clients'
-        // WHERE (date_field BETWEEN '{now}' AND '{now-30days}')
+        // WHERE date(newsDate) >= date(now()-interval 30 day)
         this.setState({
           newThisWeek: new Date(
             resData.data.client.createdAt
