@@ -74,7 +74,7 @@ class App extends Component {
     };
     this.setState({ authLoading: true });
     // fetch("http://localhost:5000/graphql", {
-    fetch("http://localhost:4000/graphql'", {
+    fetch("http://localhost:8080/graphql", {
       mode: "no-cors",
       method: "POST",
       headers: {
