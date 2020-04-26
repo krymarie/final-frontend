@@ -340,6 +340,7 @@ class Feed extends Component {
         />
         <section className="feed__status"></section>
         <section className="feed__control">
+          <h2>New Client</h2>
           <Button mode="raised" design="accent" onClick={this.newPostHandler}>
             New Client
           </Button>

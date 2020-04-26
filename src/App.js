@@ -9,6 +9,8 @@ import MobileNavigation from "./components/Navigation/MobileNavigation/MobileNav
 import ErrorHandler from "./components/ErrorHandler/ErrorHandler";
 import FeedPage from "./pages/Feed/Feed";
 import SingleClientPage from "./pages/Feed/SingleClient/SingleClient";
+import Pipeline from "./pages/Feed/Pipeline/Pipeline";
+import PhoneBook from "./pages/Feed/PhoneBook/PhoneBook";
 // import LoginPage from "./pages/Auth/Login";
 // import SignupPage from "./pages/Auth/Signup";
 import "./App.css";
@@ -220,6 +222,20 @@ class App extends Component {
             render={(props) => (
               <FeedPage userId={this.state.userId} token={this.state.token} />
             )}
+          />
+          <Route
+            path="/pipeline"
+            render={(props) => (
+              <Pipeline
+                {...props}
+                userId={this.state.userId}
+                token={this.state.token}
+              />
+            )}
+          />
+          <Route
+            path="/phone-book"
+            render={(props) => <PhoneBook {...props} />}
           />
           <Route
             path="/:clientID"

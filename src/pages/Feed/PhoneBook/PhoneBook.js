@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 
-import "./SingleClient.css";
+import "./PhoneBook.css";
 
-class SingleClient extends Component {
+class PhoneBook extends Component {
   state = {
     name: "Mary Jane",
-    content: "Buyer seems very interested but need space to decide.",
     phone: "801-555-5555",
-    interestLevel: "3",
   };
 
   componentDidMount() {
@@ -65,14 +63,32 @@ class SingleClient extends Component {
   render() {
     return (
       <section className="single-client">
-        <h2>Client Profile</h2>
-        <h3>{this.state.name}</h3>
-        <p>Details: {this.state.content}</p>
+        <h2>Phone Book</h2>
+        <h3>Name/Phone:</h3>
+        {/* TODO: add logic here to look thru all clients and populate */}
+        <p>Name: {this.state.name}</p>
         <p>Phone: {this.state.phone}</p>
-        <p>Interest Level: {this.state.interestLevel}</p>
+        <br />
+        <p>Name: {this.state.name}</p>
+        <p>Phone: {this.state.phone}</p>
+        <br />
+        <p>Name: {this.state.name}</p>
+        <p>Phone: {this.state.phone}</p>
+        <br />
+        <p>Name: {this.state.name}</p>
+        <p>Phone: {this.state.phone}</p>
+        <br />
+        <p>Name: {this.state.name}</p>
+        <p>Phone: {this.state.phone}</p>
+        <br />
+        <p>Name: {this.state.name}</p>
+        <p>Phone: {this.state.phone}</p>
+        <br />
+        <p>Name: {this.state.name}</p>
+        <p>Phone: {this.state.phone}</p>
       </section>
     );
   }
 }
 
-export default SingleClient;
+export default PhoneBook;
