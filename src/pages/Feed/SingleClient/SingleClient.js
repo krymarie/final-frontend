@@ -5,8 +5,6 @@ import "./SingleClient.css";
 class SingleClient extends Component {
   state = {
     title: "",
-    author: "",
-    date: '',
     content: "",
     phone: "",
     interestLevel: "",
@@ -33,7 +31,7 @@ class SingleClient extends Component {
       },
     };
     // fetch("http://localhost:5000/graphql", {
-    fetch("http://localhost:8080/graphql", {
+    fetch("http://localhost:4000/graphql'", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -67,13 +65,22 @@ class SingleClient extends Component {
   render() {
     return (
       <section className="single-client">
-        <h1>{this.state.title}</h1>
-        <h2>
-          Created by {this.state.author} on {this.state.date}
-        </h2>
-        <p>{this.state.content}</p>
+        <h2>Client Pipeline</h2>
+        <h3>This Week:</h3>
+        <p>New Clients: 2</p>
+        <p>Average New Clients/week: 8</p>
+        {/* <p>{this.state.content}</p>
         <p>{this.state.phone}</p>
-        <p>{this.state.interestLevel}</p>
+        <p>{this.state.interestLevel}</p> */}
+        <br />
+        <h3>Last 30 Days:</h3>
+        <p>New Clients: 83</p>
+        <p>Average New Clients/week: 237</p>
+        <br />
+        <h3>Totals:</h3>
+        <p>Active Clients: 973</p>
+        <p>Total Client: 4</p>
+        <p>Closed Clients: 15</p>
       </section>
     );
   }

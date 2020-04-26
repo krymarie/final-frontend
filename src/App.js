@@ -9,15 +9,15 @@ import MobileNavigation from "./components/Navigation/MobileNavigation/MobileNav
 import ErrorHandler from "./components/ErrorHandler/ErrorHandler";
 import FeedPage from "./pages/Feed/Feed";
 import SingleClientPage from "./pages/Feed/SingleClient/SingleClient";
-import LoginPage from "./pages/Auth/Login";
-import SignupPage from "./pages/Auth/Signup";
+// import LoginPage from "./pages/Auth/Login";
+// import SignupPage from "./pages/Auth/Signup";
 import "./App.css";
 
 class App extends Component {
   state = {
     showBackdrop: false,
     showMobileNav: false,
-    isAuth: false,
+    isAuth: true, //hard coded for school only
     token: null,
     userId: null,
     authLoading: false,
@@ -73,8 +73,8 @@ class App extends Component {
       },
     };
     this.setState({ authLoading: true });
-    fetch("http://localhost:5000/graphql", {
-      // fetch("http://localhost:8080/graphql", {
+    // fetch("http://localhost:5000/graphql", {
+    fetch("http://localhost:4000/graphql'", {
       mode: "no-cors",
       method: "POST",
       headers: {
@@ -138,8 +138,8 @@ class App extends Component {
         password: authData.signupForm.password.value,
       },
     };
-    fetch("http://localhost:5000/graphql", {
-      // fetch("http://localhost:8080/graphql", {
+    // fetch("http://localhost:5000/graphql", {
+    fetch("http://localhost:4000/graphql'", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -186,7 +186,7 @@ class App extends Component {
   render() {
     let routes = (
       <Switch>
-        <Route
+        {/* <Route
           path="/"
           exact
           render={props => (
@@ -207,7 +207,7 @@ class App extends Component {
               loading={this.state.authLoading}
             />
           )}
-        />
+        /> */}
         <Redirect to="/" />
       </Switch>
     );
